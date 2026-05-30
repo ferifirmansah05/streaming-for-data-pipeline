@@ -11,8 +11,7 @@ Project ini mengimplementasikan sebuah pipeline data realtime menggunakan **Apac
    - **Range Validation**: Membatasi nominal transaksi (`amount`) hanya pada rentang 1 s.d. 10.000.000.
    - **Source Validation**: Memastikan asal transaksi hanya berasal dari platform resmi (`mobile`, `web`, `pos`).
    - **Duplicate Detection**: Mendeteksi duplikasi data berdasarkan kombinasi unik `user_id` dan `timestamp`.
-3. **Mekanisme Penanganan Duplikat Tanpa Data Loss**: Berbeda dengan metode `.dropDuplicates()` bawaan Spark yang menghapus data secara diam-diam, proyek ini mengidentifikasi duplikat di dalam *micro-batch* menggunakan `row_number()`, menandainya dengan alasan `Duplicate event`, lalu mengarahkannya ke DLQ.
-4. **Watermarking & Late Events Handling**: Menerapkan `.withWatermark("event_time", "3 minutes")`. Data valid yang datang terlambat lebih dari 3 menit akan otomatis dianggap kedaluwarsa oleh windowing Spark.
-5. **Tumbling Window & Accumulative Monitoring**: Melakukan agregasi data valid per window waktu 1 menit dan menghitung total kumulatif transaksi (*running total*) yang diperbarui pada setiap micro-batch melalui fungsi `foreachBatch`.
+3. **Watermarking & Late Events Handling**: Menerapkan `.withWatermark("event_time", "3 minutes")`. Data valid yang datang terlambat lebih dari 3 menit akan otomatis dianggap kedaluwarsa oleh windowing Spark.
+4. **Tumbling Window & Accumulative Monitoring**: Melakukan agregasi data valid per window waktu 1 menit dan menghitung total kumulatif transaksi (*running total*) yang diperbarui pada setiap micro-batch melalui fungsi `foreachBatch`.
 
 ---
