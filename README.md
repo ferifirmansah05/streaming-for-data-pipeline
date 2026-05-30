@@ -5,7 +5,7 @@ Project ini mengimplementasikan sebuah pipeline data realtime menggunakan **Apac
 ---
 
 1. **Real-Time Event Producer**: Mensimulasikan pengiriman data transaksi dalam format JSON setiap 1–2 detik dengan menyisipkan berbagai skenario anomali secara dinamis (data tidak valid, data terlambat, dan data duplikat).
-2. **5 Layer Validasi Wajib**:
+2. **5 Layer Validasi**:
    - **Mandatory Field Check**: Memastikan keberadaan field utama (`user_id`, `amount`, `timestamp`).
    - **Type Validation**: Memvalidasi kesesuaian tipe data, termasuk konversi string timestamp ke tipe `Timestamp` Spark.
    - **Range Validation**: Membatasi nominal transaksi (`amount`) hanya pada rentang 1 s.d. 10.000.000.
